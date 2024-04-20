@@ -59,13 +59,19 @@
         function handleCheckboxClick() {
             let noneCheckbox = document.getElementById('allergenNone');
             if (noneCheckbox.checked) {
-                let checkboxes = document.querySelectorAll('input[type="checkbox"][name="allergies[]"]:not(#allergenNone)');
+                let checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#allergenNone)');
                 checkboxes.forEach(function(checkbox) {
                     checkbox.checked = false;
                 });
             }
         }
+
         let noneCheckbox = document.getElementById('allergenNone');
         noneCheckbox.addEventListener('click', handleCheckboxClick);
+
+        let checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#allergenNone)');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('click', handleCheckboxClick);
+        });
     </script>
 </x-layout>
