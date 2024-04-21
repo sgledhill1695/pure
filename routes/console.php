@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Jobs\CreateDelivery;
+use Illuminate\Support\Facades\Schedule;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+
+//Run command php artisan schedule:work to run locally
+Schedule::job(new CreateDelivery)->everyFiveMinutes();
