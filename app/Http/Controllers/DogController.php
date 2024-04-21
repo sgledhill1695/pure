@@ -31,7 +31,7 @@ class DogController extends Controller
     public $validation_rules = [
         'name' => 'required|max:255',
         'years' => 'required|integer|gte:0',
-        'months' => 'required|integer|between:1,12',
+        'months' => 'required|integer|between:0,12',
         'breed' => 'required|string',
         'allergies' => 'required|array'
     ];
@@ -39,7 +39,7 @@ class DogController extends Controller
     public $final_validation_rules = [
         'name' => 'required|max:255',
         'years' => 'required|integer|gte:0',
-        'months' => 'required|integer|between:1,12',
+        'months' => 'required|integer|between:0,12',
         'breed' => 'required|string',
         'allergies' => 'required|array',
         'subscription_id' => 'required|integer|gt:0'
@@ -53,10 +53,15 @@ class DogController extends Controller
 
     function convertMonthsToReadable($months)
     {
+        $age_string = '';
+
+        if($months === 0){
+            $age_string = 'Less than one month';
+        }
+
         $years = floor($months / 12);
         $remaining_months = $months % 12;
 
-        $age_string = '';
 
         if ($years > 0) {
             $age_string .= $years . ' year';
